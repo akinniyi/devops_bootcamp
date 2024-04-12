@@ -1,3 +1,7 @@
+from flask import Flask, jsonify, render_template
+
+app = Flask(__name__)
+
 list_of_employees = [
     {
         '_id': '0skX4zgfbx4QHHuX1tl7',
