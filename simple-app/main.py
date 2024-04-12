@@ -39,3 +39,39 @@ list_of_employees = [
         'date_of_birth': '28-01-1995'
     }
 ]
+
+@app.route("/hello")
+def hello():
+    return render_template('index.html')
+
+@app.route("/")
+def index():
+    return jsonify([
+        {
+            "method": "GET",
+            "endpoint": "/api/v1/employees/list",
+            "response": "returns list of employees details"
+        },
+        {
+            "method": "GET",
+            "endpoint": "/api/v1/employees/<string:employee_id>",
+            "response": "returns employee information based on employee id"
+        }
+    ])
+
+
+@app.route("/api/v1/employees/list")
+def get_employees_list():
+    return jsonify(list_of_employees), 200
+
+
+@app.route("/api/v1/employees/<string:employee_id>")
+def get_employee_by_id(employee_id):
+    for employee in list_of_employees:
+        if employee_id in employee['_id']:
+            return jsonify(employee), 200
+        return jsonify({'error': 'Employee does not exist'}), 404
+
+
+if __name__ == '__main__':
+    app.run(threaded=True, host='0.0.0.0', port=5001)
