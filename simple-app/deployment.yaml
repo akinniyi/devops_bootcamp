@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: simple-app
-        image: simple-app:latest
+        image: niyibuggy/simple-app
 
         ports:
         - containerPort: 8000
